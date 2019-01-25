@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="uk-table uk-table-divider uk-table-small uk-table-responsive uk-table-middle">
+        <thead>
+        <tr>
+            <th class="uk-table-shrink">Severity</th>
+            <th class="uk-table-shrink">Time</th>
+            <th class="uk-table-expand">Message</th>
+        </tr>
+        </thead>
+        <tbody id="logs-tbody">
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('logger-socket') }}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="uk-padding">
+        <h1>Visit #{{ visit.id }}</h1>
+        <dl class="uk-description-list uk-description-list-divider">
+            <dt>Occurred at</dt>
+            <dd>{{ visit.occurredAt|localizeddate }}</dd>
+            <dt>Language</dt>
+            <dd>{{ visit.language }}</dd>
+            <dt>Device used</dt>
+            <dd>
+                {{ visit.device }}
+            </dd>
+            <dt>Screen size</dt>
+            <dd>{{ visit.screenSize }}</dd>
+            <dt>User-Agent</dt>
+            <dd>
+                {% if visit.browser %}
+                    {{ visit.browser.browser }} {{ visit.browser.version }} by {{ visit.browser.browser_maker }} for {{ visit.browser.platform }}
+                {% else %}
+                    {{ visit.userAgent }}
+                {% endif %}
+            </dd>
+            {% if visit.visitor.internalId is defined %}
+                <dt>Visitor</dt>
+                <dd>
+                    <a href="{{ path('visitor', {'id': visit.visitor.id}) }}">{{ visit.visitor.internalId }}</a>
+                </dd>
+            {% endif %}
+        </dl>
+    </div>
+{% endblock %}
+

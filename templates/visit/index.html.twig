@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="uk-table uk-table-divider uk-table-small uk-table-responsive uk-table-middle">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Time</th>
+            <th>URL</th>
+            <th>Device</th>
+            <th>Language</th>
+            <th>Visitor #</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for visit in visits %}
+            <tr>
+                <td><a href="{{ path('visit', {'id': visit.id}) }}">{{ visit.id }}</a></td>
+                <td>{{ visit.occurredAt|localizeddate }}</td>
+                <td>{{ visit.url }}</td>
+                <td>{{ visit.device }}</td>
+                <td>{{ visit.language }}</td>
+                <td>{% if visit.visitor.internalId is defined %}
+                    <a href="{{ path('visitor', {'id': visit.visitor.id}) }}">
+                    {{ visit.visitor.internalId }}
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

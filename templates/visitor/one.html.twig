@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="uk-padding">
+        <article class="uk-article">
+            <h1 class="uk-article-title">Visitor {{ visitor.internalId }}</h1>
+            {% if visitor.visits[0]|default(false) != false %}
+                <p class="uk-article-meta">Last seen {{ visitor.visits[0].occurredAt|localizeddate }}</p>
+            {% endif %}
+
+            <h2>Last visits</h2>
+
+            <table class="uk-table uk-table-divider uk-table-small uk-table-responsive uk-table-middle">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Time</th>
+                    <th>URL</th>
+                    <th>Device</th>
+                    <th>Language</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for visit in visitor.visits %}
+                    <tr>
+                        <td><a href="{{ path('visit', {'id': visit.id}) }}">{{ visit.id }}</a></td>
+                        <td>{{ visit.occurredAt|localizeddate }}</td>
+                        <td>{{ visit.url }}</td>
+                        <td>{{ visit.device }}</td>
+                        <td>{{ visit.language }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </article>
+    </div>
+{% endblock %}
+

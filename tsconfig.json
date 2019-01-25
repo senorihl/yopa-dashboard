@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "removeComments": true,
+    "sourceMap": true
+  },
+  "include": [
+    "assets/ts/**/*"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}

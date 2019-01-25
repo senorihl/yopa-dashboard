@@ -2,7 +2,9 @@ FROM php:7.2-fpm
 LABEL maintainer="senorihl <senorihl@gmail.com>"
 
 ENV NODE_VERSION 10.15.0
-ENV PATH /usr/src/app/bin:/usr/src/app/bin:/usr/src/app/node_modules/.bin:$PATH
+ENV YARN_CACHE_FOLDER /home/dev/.yarn/cache
+ENV COMPOSER_HOME /home/dev/.composer
+ENV PATH /usr/src/app/bin:/usr/src/app/node_modules/.bin:$PATH
 ENV TIMEZONE UTC
 
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
@@ -17,6 +19,8 @@ RUN docker-php-ext-configure intl \
     && docker-php-ext-install pdo_pgsql zip iconv intl opcache mbstring \
     && pecl install xdebug \
     && docker-php-ext-enable xdebug \
+    && curl -s -o "/usr/local/etc/php/browscap.ini" "https://browscap.org/stream?q=Full_PHP_BrowsCapINI" \
+    && echo "browscap=/usr/local/etc/php/browscap.ini" >> /usr/local/etc/php/php.ini \
     && echo "date.timezone=$TIMEZONE" >> /usr/local/etc/php/php.ini \
     && echo 'xdebug.remote_enable=1' >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo 'xdebug.remote_port=9000' >> /usr/local/etc/php/conf.d/xdebug.ini \
@@ -38,8 +42,14 @@ RUN mkdir -m 0700 /usr/src/app \
 
 USER dev
 
-RUN mkdir -p /home/dev/.composer/cache
-
 WORKDIR /usr/src/app
 
-VOLUME /home/dev/.composer/cache
+COPY --chown=dev:dev . /usr/src/app
+
+RUN mkdir -p "${COMPOSER_HOME}/cache"
+RUN mkdir -p "${YARN_CACHE_FOLDER}"
+
+RUN composer install && yarn install && yarn encore prod
+
+VOLUME $COMPOSER_HOME/cache
+VOLUME $YARN_CACHE_FOLDER
