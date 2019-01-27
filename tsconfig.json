@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
     "removeComments": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "lib": ["es5", "es6", "dom"],
+    "module":"commonjs"
   },
   "include": [
     "assets/ts/**/*"
   ],
   "exclude": [
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "node_modules"
   ]
 }

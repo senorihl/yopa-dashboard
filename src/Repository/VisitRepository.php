@@ -19,6 +19,17 @@ class VisitRepository extends ServiceEntityRepository
         parent::__construct($registry, Visit::class);
     }
 
+    public function findDeviceRepartition()
+    {
+        $qb = $this->createQueryBuilder('visit');
+
+        return $qb
+            ->select('visit.device', $qb->expr()->count('visit'))
+            ->groupBy('visit.device')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Visit[] Returns an array of Visit objects
     //  */

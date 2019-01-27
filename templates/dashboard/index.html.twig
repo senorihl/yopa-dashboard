@@ -3,7 +3,29 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <h1>Stats over last 24h</h1>
+    <div class="uk-child-width-1-2 uk-text-center" uk-grid>
+        <div>
+            <div class="uk-card uk-card-body">
+                <h2>Device repartition</h2>
+            </div>
+        </div>
+        <div>
+            <div class="uk-child-width-1-2 uk-text-center" uk-grid>
+                <div>
+                    <div class="uk-card uk-card-body">
+                        <h2>Device repartition</h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-body">
+                        <div id="device-repartition-graph"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block javascripts %}
