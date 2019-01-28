@@ -24,10 +24,42 @@ class VisitRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('visit');
 
         return $qb
-            ->select('visit.device', $qb->expr()->count('visit'))
+            ->select('visit.device', $qb->expr()->count('visit') . 'as count')
             ->groupBy('visit.device')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findLanguageRepartition()
+    {
+        $qb = $this->createQueryBuilder('visit');
+
+        return $qb
+            ->select('visit.language', $qb->expr()->count('visit') . 'as count')
+            ->groupBy('visit.language')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findTopUrl()
+    {
+        $qb = $this->createQueryBuilder('visit');
+        $qb
+            ->select(
+                'visit.url',
+                $qb->expr()->count('visit') . 'as count',
+                $qb->expr()->concat(
+                    'DATE_PART(\'year\', visit.occurredAt)',
+                    '\'-\'',
+                    'DATE_PART(\'month\', visit.occurredAt)',
+                    '\'-\'',
+                    'DATE_PART(\'day\', visit.occurredAt)',
+                    '\' \'',
+                    'DATE_PART(\'hour\', visit.occurredAt)'
+                ) . ' as hour')
+            ->groupBy('visit.url', 'hour');
+
+        return $qb->getQuery()->getResult();
     }
 
     // /**

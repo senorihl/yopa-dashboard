@@ -3,29 +3,39 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-    <h1>Stats over last 24h</h1>
-    <div class="uk-child-width-1-2 uk-text-center" uk-grid>
-        <div>
-            <div class="uk-card uk-card-body">
-                <h2>Device repartition</h2>
-            </div>
-        </div>
-        <div>
-            <div class="uk-child-width-1-2 uk-text-center" uk-grid>
-                <div>
-                    <div class="uk-card uk-card-body">
-                        <h2>Device repartition</h2>
+    <div class="uk-padding">
+        <h1>Stats over last 24h</h1>
+        <div class="uk-child-width-1-2 uk-text-center uk-grid-small" uk-grid="masonry: true">
+            <div>
+                <div class="uk-card uk-card-body uk-card-small uk-card-default">
+                    <h3 class="uk-card-title">Top 10 URL</h3>
+                    <div>
+                        <canvas id="top-url-graph"></canvas>
                     </div>
                 </div>
-                <div>
-                    <div class="uk-card uk-card-body">
-                        <div id="device-repartition-graph"></div>
+            </div>
+            <div>
+                <div class="uk-child-width-1-2 uk-text-center uk-grid-small" uk-grid="masonry: true">
+                    <div>
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default">
+                            <h3 class="uk-card-title">Language repartition</h3>
+                            <div>
+                                <canvas id="lang-repartition-graph"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-body uk-card-small uk-card-default">
+                            <h3 class="uk-card-title">Device repartition</h3>
+                            <div>
+                                <canvas id="device-repartition-graph"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block javascripts %}
