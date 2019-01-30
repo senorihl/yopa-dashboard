@@ -61,7 +61,7 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
-        "compile": [
+        "heroku-postbuild": [
             "yarn && yarn encore"
         ],
         "auto-scripts": {
