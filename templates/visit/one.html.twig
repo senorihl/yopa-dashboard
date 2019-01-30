@@ -28,6 +28,12 @@
                     <a href="{{ path('visitor', {'id': visit.visitor.id}) }}">{{ visit.visitor.internalId }}</a>
                 </dd>
             {% endif %}
+            {% if visit.geolocation is not null %}
+                <dt>Location</dt>
+                <dd>{{ visit.geolocation.country }} {{ visit.geolocation.region }} {{ visit.geolocation.city }}</dd>
+                <dt>Time zone</dt>
+                <dd>{{ visit.geolocation.timezone }}</dd>
+            {% endif %}
         </dl>
     </div>
 {% endblock %}
