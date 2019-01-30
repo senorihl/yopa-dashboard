@@ -8,12 +8,13 @@
         "sass-loader": "^7.0.1",
         "ts-loader": "^5.3.0",
         "typescript": "^3.2.4",
+        "webpack": "^4.20.0",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "heroku-postbuild": "NODE_ENV=development yarn install && NODE_ENV=development yarn encore production",
+        "heroku-postbuild": "NODE_ENV=development yarn install && yarn encore production",
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
