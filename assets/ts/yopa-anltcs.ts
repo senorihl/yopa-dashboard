@@ -7,4 +7,4 @@
     };
     v = o.createElement(p); v.async = true; v.src = '//' + a + e;
     n = o.getElementsByTagName(p)[0]; n.parentNode.insertBefore(v, n);
-})(window, document, 'script', window.location.host, '/script.js');
+})(window, document, 'script', 'https://yopa-develop.herokuapp.com', '/script.js');
