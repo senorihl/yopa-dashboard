@@ -61,9 +61,6 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
-        "heroku-postbuild": [
-            "yarn && yarn encore"
-        ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

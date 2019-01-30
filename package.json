@@ -13,6 +13,7 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
+        "heroku-postbuild": "yarn install && yarn encore",
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
