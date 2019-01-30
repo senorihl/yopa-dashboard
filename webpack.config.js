@@ -49,7 +49,7 @@ Encore
     .enableTypeScriptLoader()
 
     .addPlugin(new webpack.DefinePlugin({
-        'SERVICE_URL': process.env.SERVICE_URL || null
+        'SERVICE_URL': JSON.stringify(process.env.SERVICE_URL || null)
     }))
 
     // uncomment if you're having problems with a jQuery plugin
