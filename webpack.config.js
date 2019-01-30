@@ -1,3 +1,4 @@
+var webpack = require("webpack");
 var Encore = require('@symfony/webpack-encore');
 
 Encore
@@ -46,6 +47,10 @@ Encore
 
     // uncomment if you use TypeScript
     .enableTypeScriptLoader()
+
+    .addPlugin(new webpack.DefinePlugin({
+        'SERVICE_URL': process.env.SERVICE_URL || null
+    }))
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()

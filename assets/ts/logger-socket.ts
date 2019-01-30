@@ -1,5 +1,5 @@
 import * as io from "socket.io-client";
-const socket = io(window.location.host);
+const socket = io(SERVICE_URL || window.location.host);
 const $tbody = document.getElementById('logs-tbody');
 
 socket.on('message', console.info);
