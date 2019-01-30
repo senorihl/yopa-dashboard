@@ -13,7 +13,7 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "heroku-postbuild": "yarn install && yarn build",
+        "heroku-postbuild": "NODE_ENV=development yarn install && NODE_ENV=development yarn build",
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
