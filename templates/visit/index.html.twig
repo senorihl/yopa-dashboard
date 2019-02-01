@@ -6,7 +6,7 @@
         <tr>
             <th>#</th>
             <th>Time</th>
-            <th>URL</th>
+            <th>Action</th>
             <th>Device</th>
             <th>Language</th>
             <th>Visitor #</th>
@@ -17,7 +17,7 @@
             <tr>
                 <td><a href="{{ path('visit', {'id': visit.id}) }}">{{ visit.id }}</a></td>
                 <td>{{ visit.occurredAt|localizeddate }}</td>
-                <td>{{ visit.url }}</td>
+                <td>{{ visit.action }}</td>
                 <td>{{ visit.device }}</td>
                 <td>{{ visit.language }}</td>
                 <td>{% if visit.visitor.internalId is defined %}

@@ -25,9 +25,9 @@ class Visit
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="text", nullable=false)
+     * @ORM\Column(name="action", type="text", nullable=false)
      */
-    private $url;
+    private $action;
 
     /**
      * @var string|null
@@ -101,16 +101,14 @@ class Visit
         return $this->id;
     }
 
-    public function getUrl(): ?string
+    public function getAction(): string
     {
-        return $this->url;
+        return $this->action;
     }
 
-    public function setUrl(string $url): self
+    public function setAction(string $action): void
     {
-        $this->url = $url;
-
-        return $this;
+        $this->action = $action;
     }
 
     public function getPreviousUrl(): ?string

@@ -4,9 +4,10 @@
     <table class="uk-table uk-table-divider uk-table-small uk-table-responsive uk-table-middle">
         <thead>
         <tr>
-            <th class="uk-table-shrink">Severity</th>
-            <th class="uk-table-shrink">Time</th>
-            <th class="uk-table-expand">Message</th>
+            <th class="uk-table-expand">Type</th>
+            <th class="uk-table-expand">Options</th>
+            <th class="uk-table-expand">Wrapper</th>
+            <th class="uk-table-expand">Visitor</th>
         </tr>
         </thead>
         <tbody id="logs-tbody">
@@ -15,6 +16,24 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('logger-socket') }}
-    {{ parent() }}
+    {{ encore_entry_script_tags('app') }}
+    <script>
+        var tableBody = document.getElementById('logs-tbody');
+        window["onYopaLoaded"] = function (yopa) {
+            yopa.on('pixel', function (pixelUrl, type, opts, wrapper, visitor) {
+                tableBody.insertAdjacentHTML('afterBegin', '<tr>' +
+                    '<td><pre>'+ type +'</pre></td>' +
+                    '<td><pre>'+ JSON.stringify(opts) +'</pre></td>' +
+                    '<td><pre>'+ JSON.stringify(wrapper) +'</pre></td>' +
+                    '<td>'+ (typeof visitor !== "undefined" ? ('<pre>' + JSON.stringify(visitor) + '</pre>') : '') +'</td>' +
+                    '</tr>');
+            });
+            {% if app.user %}
+                yopa.identity({{ app.user|json_encode }});
+            {% endif %}
+            yopa.page({{ app.request.attributes.get("_controller")|json_encode|raw }});
+            yopa.click('a sample button click');
+            yopa.mailing('subscribe');
+        };
+    </script>
 {% endblock %}

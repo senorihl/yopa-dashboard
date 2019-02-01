@@ -61,11 +61,11 @@ class ChartController extends AbstractController
             if (!isset($simple[$visitsCount['hour']])) {
                 $simple[$visitsCount['hour']] = [];
             }
-            if (!isset($simple[$visitsCount['hour']][$visitsCount['url']])) {
-                $simple[$visitsCount['hour']][$visitsCount['url']] = [];
+            if (!isset($simple[$visitsCount['hour']][$visitsCount['action']])) {
+                $simple[$visitsCount['hour']][$visitsCount['action']] = [];
             }
 
-            $simple[$visitsCount['hour']][$visitsCount['url']] = $visitsCount['count'];
+            $simple[$visitsCount['hour']][$visitsCount['action']] = $visitsCount['count'];
         }
 
         return new JsonResponse($simple);

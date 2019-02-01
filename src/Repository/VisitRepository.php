@@ -46,7 +46,7 @@ class VisitRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('visit');
         $qb
             ->select(
-                'visit.url',
+                'visit.action',
                 $qb->expr()->count('visit') . 'as count',
                 $qb->expr()->concat(
                     'DATE_PART(\'year\', visit.occurredAt)',
@@ -57,7 +57,9 @@ class VisitRepository extends ServiceEntityRepository
                     '\' \'',
                     'DATE_PART(\'hour\', visit.occurredAt)'
                 ) . ' as hour')
-            ->groupBy('visit.url', 'hour');
+            ->where($qb->expr()->eq('visit.type', '?0'))
+            ->setParameter(0, 'page')
+            ->groupBy('visit.action', 'hour');
 
         return $qb->getQuery()->getResult();
     }

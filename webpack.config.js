@@ -21,7 +21,6 @@ Encore
     .addStyleEntry('style', './assets/scss/app.scss')
     .addEntry('app', './assets/ts/app.ts')
     .addEntry('dashboard', './assets/ts/dashboard.ts')
-    .addEntry('logger-socket', './assets/ts/logger-socket.ts')
     //.addEntry('page2', './assets/js/page2.js')
 
     // will require an extra script tag for runtime.js

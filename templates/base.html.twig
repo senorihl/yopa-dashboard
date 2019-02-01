@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +16,7 @@
                 <li><a class="" href="{{ path('dashboard') }}">Home</a></li>
                 <li><a class="" href="{{ path('visits') }}">Visits</a></li>
                 <li><a class="" href="{{ path('visitors') }}">Visitors</a></li>
-                <li><a class="" href="{{ path('logger') }}">Logs</a></li>
+                <li><a class="" href="{{ path('logger') }}#yor=navbar">Logs</a></li>
             </ul>
         </div>
     </nav>
@@ -26,8 +26,10 @@
     {{ encore_entry_script_tags('app') }}
     <script>
         window["onYopaLoaded"] = function (yopa) {
-            yopa.identity({{ app.user|json_encode }});
-            yopa.page('{{ app.request.pathInfo }}');
+            {% if app.user %}
+                yopa.identity({{ app.user|json_encode }});
+            {% endif %}
+            yopa.page({{ app.request.attributes.get("_controller")|json_encode|raw }});
         };
     </script>
 {% endblock %}

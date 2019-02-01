@@ -4,6 +4,8 @@
     <div class="uk-padding">
         <h1>Visit #{{ visit.id }}</h1>
         <dl class="uk-description-list uk-description-list-divider">
+            <dt>Action</dt>
+            <dd>{{ visit.action }}</dd>
             <dt>Occurred at</dt>
             <dd>{{ visit.occurredAt|localizeddate }}</dd>
             <dt>Language</dt>
@@ -22,13 +24,13 @@
                     {{ visit.userAgent }}
                 {% endif %}
             </dd>
-            {% if visit.visitor.internalId is defined %}
+            {% if visit.visitor.internalId is not null %}
                 <dt>Visitor</dt>
                 <dd>
                     <a href="{{ path('visitor', {'id': visit.visitor.id}) }}">{{ visit.visitor.internalId }}</a>
                 </dd>
             {% endif %}
-            {% if visit.geolocation is not null %}
+            {% if visit.geolocation.country is not null %}
                 <dt>Location</dt>
                 <dd>{{ visit.geolocation.country }} {{ visit.geolocation.region }} {{ visit.geolocation.city }}</dd>
                 <dt>Time zone</dt>
