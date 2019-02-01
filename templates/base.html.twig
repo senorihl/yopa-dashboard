@@ -26,7 +26,7 @@
     {{ encore_entry_script_tags('app') }}
     <script>
         window["onYopaLoaded"] = function (yopa) {
-            yopa.idendity({{ app.user|json_encode }});
+            yopa.identity({{ app.user|json_encode }});
             yopa.page('{{ app.request.pathInfo }}');
         };
     </script>

@@ -1,6 +1,6 @@
 ((y, o, p, a, e, v, n, t, s) => {
     if (y['yopa']) return;
-    y['yopa'] = {h: a, events: [],
+    y['yopa'] = {hostname: a, events: [],
         page: function() { this.events.push({t:'page', a:arguments}) },
         click: function () { this.events.push({t:'click', a:arguments}) },
         misc: function (name) { this.events.push({t:'misc', a:arguments}) }
