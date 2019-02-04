@@ -78,9 +78,17 @@ const timeFormat = 'MM/DD/YYYY HH:mm';
 charts.topUrl = new Chart(chartElement.topUrl, {
     type: "line",
     options: {
+        cubicInterpolationMode: 'monotone',
         scales: {
             yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Visit count'
+                },
                 stacked: true,
+                ticks: {
+                    beginAtZero: true
+                }
             }],
             xAxes: [{
                 type: 'time',
@@ -91,7 +99,7 @@ charts.topUrl = new Chart(chartElement.topUrl, {
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: 'Date'
+                    labelString: 'Time'
                 }
             }],
         },
@@ -171,6 +179,8 @@ async function loadTopURL() {
 
 
     });
+
+    console.log(charts.topUrl.data);
 
     charts.topUrl.update();
 }
