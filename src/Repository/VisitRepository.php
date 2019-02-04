@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Visit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -26,6 +27,8 @@ class VisitRepository extends ServiceEntityRepository
         return $qb
             ->select('visit.device', $qb->expr()->count('visit') . 'as count')
             ->groupBy('visit.device')
+            ->where($qb->expr()->gte('visit.occurredAt', '?0'))
+            ->setParameter(0, date_create('yesterday'))
             ->getQuery()
             ->getResult();
     }
@@ -37,6 +40,8 @@ class VisitRepository extends ServiceEntityRepository
         return $qb
             ->select('visit.language', $qb->expr()->count('visit') . 'as count')
             ->groupBy('visit.language')
+            ->where($qb->expr()->gte('visit.occurredAt', '?0'))
+            ->setParameter(0, date_create('yesterday'))
             ->getQuery()
             ->getResult();
     }
@@ -58,6 +63,9 @@ class VisitRepository extends ServiceEntityRepository
                     'DATE_PART(\'hour\', visit.occurredAt)'
                 ) . ' as hour')
             ->where($qb->expr()->eq('visit.type', '?0'))
+            ->innerJoin('App\Entity\Visit', 'today', Join::WITH, $qb->expr()->eq('today.id', 'visit.id'))
+            ->andWhere($qb->expr()->gte('today.occurredAt', '?1'))
+            ->setParameter(1, date_create('yesterday'))
             ->setParameter(0, 'page')
             ->groupBy('visit.action', 'hour');
 
