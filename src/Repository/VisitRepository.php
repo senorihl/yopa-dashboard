@@ -51,7 +51,7 @@ class VisitRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('visit');
         $qb
             ->select(
-                'visit.action',
+                'visit.fullAction as action',
                 $qb->expr()->count('visit') . 'as count',
                 $qb->expr()->concat(
                     'DATE_PART(\'year\', visit.occurredAt)',
@@ -67,7 +67,8 @@ class VisitRepository extends ServiceEntityRepository
             ->andWhere($qb->expr()->gte('today.occurredAt', '?1'))
             ->setParameter(1, date_create('yesterday'))
             ->setParameter(0, 'page')
-            ->groupBy('visit.action', 'hour');
+            ->orderBy('count', 'asc')
+            ->groupBy('action', 'hour');
 
         return $qb->getQuery()->getResult();
     }

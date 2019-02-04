@@ -19,7 +19,8 @@ class VisitController extends AbstractController
     {
         return $this->render('visit/index.html.twig', [
             'controller_name' => 'VisitController',
-            'visits' => $repository->findBy(['type' => 'page'], ['occurredAt' => 'DESC'], 20, 0)
+            'visits' => $repository->findBy(['type' => 'page'], ['occurredAt' => 'DESC'], 20, 0),
+            'pixel' => ['action' => 'Visits', 'breadcrumb' => ['Home']]
         ]);
     }
     /**
@@ -28,7 +29,8 @@ class VisitController extends AbstractController
     public function one($id, VisitRepository $repository)
     {
         return $this->render('visit/one.html.twig', [
-            'visit' => $repository->find($id)
+            'visit' => $repository->find($id),
+            'pixel' => ['breadcrumb' => ['Home', 'Visits'], 'action' => 'Single']
         ]);
     }
 }

@@ -29,7 +29,9 @@
             {% if app.user %}
                 yopa.identity({{ app.user|json_encode }});
             {% endif %}
-            yopa.page({{ app.request.attributes.get("_controller")|json_encode|raw }});
+            {% if pixel is defined and pixel.action is defined %}
+                yopa.page({{ pixel.action|json_encode|raw }}, {{ pixel|default({})|json_encode|raw }});
+            {% endif %}
         };
     </script>
 {% endblock %}

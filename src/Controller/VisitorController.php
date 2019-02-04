@@ -19,6 +19,7 @@ class VisitorController extends AbstractController
     {
         return $this->render('visitor/index.html.twig', [
             'controller_name' => 'VisitorController',
+            'pixel' => ['breadcrumb' => ['Home'], 'action' => 'Visitor']
         ]);
     }
     /**
@@ -28,7 +29,8 @@ class VisitorController extends AbstractController
     {
         return $this->render('visitor/one.html.twig', [
             'controller_name' => 'VisitorController',
-            'visitor' => $repository->find($id)
+            'visitor' => $repository->find($id),
+            'pixel' => ['breadcrumb' => ['Home', 'Visitor'], 'action' => 'Single']
         ]);
     }
 }

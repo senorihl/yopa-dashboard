@@ -30,6 +30,20 @@ class Visit
     private $action;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="full_action", type="text", nullable=false)
+     */
+    private $fullAction;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="breadcrumb", type="json_array", nullable=false)
+     */
+    private $breadcrumb;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="previous_url", type="text", nullable=true)
@@ -106,21 +120,9 @@ class Visit
         return $this->action;
     }
 
-    public function setAction(string $action): void
-    {
-        $this->action = $action;
-    }
-
     public function getPreviousUrl(): ?string
     {
         return $this->previousUrl;
-    }
-
-    public function setPreviousUrl(?string $previousUrl): self
-    {
-        $this->previousUrl = $previousUrl;
-
-        return $this;
     }
 
     public function getType(): ?string
@@ -128,23 +130,9 @@ class Visit
         return $this->type;
     }
 
-    public function setType(?string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
     public function getScreenSize(): ?string
     {
         return $this->screenSize;
-    }
-
-    public function setScreenSize(?string $screenSize): self
-    {
-        $this->screenSize = $screenSize;
-
-        return $this;
     }
 
     public function getBrowser()
@@ -157,23 +145,9 @@ class Visit
         return $this->userAgent;
     }
 
-    public function setUserAgent(?string $userAgent): self
-    {
-        $this->userAgent = $userAgent;
-
-        return $this;
-    }
-
     public function getDevice(): ?string
     {
         return $this->device;
-    }
-
-    public function setDevice(?string $device): self
-    {
-        $this->device = $device;
-
-        return $this;
     }
 
     public function getLanguage(): ?string
@@ -181,23 +155,9 @@ class Visit
         return $this->language;
     }
 
-    public function setLanguage(?string $language): self
-    {
-        $this->language = $language;
-
-        return $this;
-    }
-
     public function getOccurredAt(): ?\DateTimeInterface
     {
         return $this->occurredAt;
-    }
-
-    public function setOccurredAt(\DateTimeInterface $occurredAt): self
-    {
-        $this->occurredAt = $occurredAt;
-
-        return $this;
     }
 
     public function getVisitor(): ?Visitor
@@ -205,22 +165,24 @@ class Visit
         return $this->visitor;
     }
 
-    public function setVisitor(?Visitor $visitor): self
-    {
-        $this->visitor = $visitor;
-
-        return $this;
-    }
-
     public function getGeolocation(): ?GeoLocation
     {
         return $this->geolocation;
     }
 
-    public function setGeolocation(?GeoLocation $geolocation): self
+    /**
+     * @return string
+     */
+    public function getFullAction(): string
     {
-        $this->geolocation = $geolocation;
+        return $this->fullAction;
+    }
 
-        return $this;
+    /**
+     * @return string
+     */
+    public function getBreadcrumb(): string
+    {
+        return $this->breadcrumb;
     }
 }
