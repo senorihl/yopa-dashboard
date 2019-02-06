@@ -170,18 +170,12 @@ class Visit
         return $this->geolocation;
     }
 
-    /**
-     * @return string
-     */
-    public function getFullAction(): string
+    public function getFullAction(): ?string
     {
         return $this->fullAction;
     }
 
-    /**
-     * @return string
-     */
-    public function getBreadcrumb(): string
+    public function getBreadcrumb(): ?string
     {
         return $this->breadcrumb;
     }
