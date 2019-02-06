@@ -76,6 +76,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('pixel-composer') }}.addEventListener('DOMContentLoaded', updatePixel);
-    </script>
+    {{ encore_entry_script_tags('pixel-composer') }}
 {% endblock %}

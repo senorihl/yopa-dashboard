@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Form\PixelType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,7 +13,8 @@ class ComposerController extends AbstractController
     public function index()
     {
         return $this->render('composer/index.html.twig', [
-            'controller_name' => 'ComposerController'
+            'controller_name' => 'ComposerController',
+            'pixel' => ['action' => 'Pixel Composer', 'breadcrumb' => ['Home']],
         ]);
     }
 }
