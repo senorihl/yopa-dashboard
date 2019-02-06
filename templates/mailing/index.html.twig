@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="uk-table uk-table-divider uk-table-small uk-table-responsive uk-table-middle">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Time</th>
+            <th>Action</th>
+            <th>Device</th>
+            <th>User-Agent</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for visit in visits %}
+            <tr>
+                <td><a href="{{ path('visit', {'id': visit.id}) }}">{{ visit.id }}</a></td>
+                <td>{{ visit.occurredAt|localizeddate }}</td>
+                <td>{{ visit.fullAction }}</td>
+                <td>{{ visit.device }}</td>
+                <td>
+                    {% if visit.browser %}
+                        {{ visit.browser.browser }} {{ visit.browser.version }} by {{ visit.browser.browser_maker }} for {{ visit.browser.platform }}
+                    {% else %}
+                        {{ visit.userAgent }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

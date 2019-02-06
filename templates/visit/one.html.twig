@@ -8,14 +8,18 @@
             <dd>{{ visit.fullAction }}</dd>
             <dt>Occurred at</dt>
             <dd>{{ visit.occurredAt|localizeddate }}</dd>
-            <dt>Language</dt>
-            <dd>{{ visit.language }}</dd>
+            {% if visit.language is not null %}
+                <dt>Language</dt>
+                <dd>{{ visit.language }}</dd>
+            {% endif %}
             <dt>Device used</dt>
             <dd>
                 {{ visit.device }}
             </dd>
-            <dt>Screen size</dt>
-            <dd>{{ visit.screenSize }}</dd>
+            {% if visit.screenSize is not null %}
+                <dt>Screen size</dt>
+                <dd>{{ visit.screenSize }}</dd>
+            {% endif %}
             <dt>User-Agent</dt>
             <dd>
                 {% if visit.browser %}
