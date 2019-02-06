@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ComposerController!{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+        {{ encore_entry_link_tags('pixel-composer') }}
+    {% endblock %}
+
+{% block body %}
+    <div class="uk-padding">
+        <h1>Pixel Composer</h1>
+        <form id="pixel-composer" class="uk-form-stacked">
+            <div>
+                <label class="uk-form-label">Type</label>
+                <div class="uk-form-controls">
+                    <select class="uk-select" name="pixel_type" id="pixel_type">
+                        <option selected value="page">Page</option>
+                        <option value="click">Click</option>
+                        <option value="mailing">Mailing</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div>
+                <label class="uk-form-label">Action</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" type="text" name="pixel_action" id="pixel_action" value="sample action">
+                </div>
+            </div>
+            <br />
+            <div>
+                <label class="uk-form-label">
+                    Breadcrumb
+                    {% set prototype -%}
+                        <div class="uk-inline">
+                            <button type="button" class="uk-form-icon uk-form-icon-flip"
+                                    onclick="window.breadcrumbRemove('pixel_breadcrumb___name__')"
+                                    uk-icon="minus">
+                            </button>
+                            <input class="uk-input" type="text" name="pixel_breadcrumb___name__" id="pixel_breadcrumb___name__">
+                        </div>
+                    {%- endset %}
+                    <button
+                            type="button"
+                            id="add-breadcrumb-element"
+                            for="pixel_breadcrumb"
+                            class="uk-button uk-button-text uk-button-small"
+                            data-prototype="{{ prototype|escape }}">
+                        <span uk-icon="plus-circle"></span>
+                    </button>
+                </label>
+                <div class="uk-form-controls" id="pixel_breadcrumbholder">
+                    {{ prototype|replace({'__name__' : 0})|raw }}
+                </div>
+            </div>
+            <br />
+            <div>
+                <label class="uk-form-label">Custom information</label>
+                <div class="uk-form-controls">
+                    <input type="hidden" name="pixel_custom" id="pixel_custom" value="{}">
+                    <div id="pixel_custom_editor">
+
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div>
+                <label class="uk-form-label">Pixel URL</label>
+                <div class="uk-form-controls">
+                    <textarea id="result" class="uk-textarea" type="text" placeholder="/pixel.png" disabled style="resize:vertical; font-family: monospace"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('pixel-composer') }}.addEventListener('DOMContentLoaded', updatePixel);
+    </script>
+{% endblock %}

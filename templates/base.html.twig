@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-        {{ encore_entry_link_tags('style') }}
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
 <body>
@@ -16,6 +16,7 @@
                 <li><a class="" href="{{ path('dashboard') }}">Home</a></li>
                 <li><a class="" href="{{ path('visits') }}">Visits</a></li>
                 <li><a class="" href="{{ path('visitors') }}">Visitors</a></li>
+                <li><a class="" href="{{ path('composer') }}">Pixel Composer</a></li>
                 <li><a class="" href="{{ path('logger') }}#yor=navbar">Logs</a></li>
             </ul>
         </div>
