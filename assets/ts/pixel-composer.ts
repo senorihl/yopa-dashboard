@@ -55,7 +55,7 @@ const updatePixel = () => {
         opts.breadcrumb = breadcrumb;
     }
 
-    fields.result.value = `//${SERVICE_URL || window.location.host}/pixel.png?yt=${fields.type.value}&yc=${encodeURIComponent(JSON.stringify(opts))}`;
+    fields.result.value = `${window.location.protocol}//${SERVICE_URL || window.location.host}/pixel.png?yt=${fields.type.value}&yc=${encodeURIComponent(JSON.stringify(opts))}`;
 };
 
 new JSONEditor(fields.custom_editor, {
