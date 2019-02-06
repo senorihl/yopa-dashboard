@@ -17,7 +17,7 @@
             <tr>
                 <td><a href="{{ path('visit', {'id': visit.id}) }}">{{ visit.id }}</a></td>
                 <td>{{ visit.occurredAt|localizeddate }}</td>
-                <td>{{ visit.action }}</td>
+                <td>{{ visit.fullAction }}</td>
                 <td>{{ visit.device }}</td>
                 <td>{{ visit.language }}</td>
                 <td>{% if visit.visitor.internalId is defined %}
