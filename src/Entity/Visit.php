@@ -27,21 +27,21 @@ class Visit
     /**
      * @var string
      *
-     * @ORM\Column(name="action", type="text", nullable=false)
+     * @ORM\Column(name="action", type="text", nullable=true)
      */
     private $action;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="full_action", type="text", nullable=false)
+     * @ORM\Column(name="full_action", type="text", nullable=true)
      */
     private $fullAction;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="breadcrumb", type="json_array", nullable=false)
+     * @ORM\Column(name="breadcrumb", type="json_array", nullable=true, options={"default"="[]"})
      */
     private $breadcrumb;
 
@@ -55,42 +55,49 @@ class Visit
     /**
      * @var string|null
      *
-     * @ORM\Column(name="type", type="string", nullable=true)
+     * @ORM\Column(name="type", type="text")
      */
     private $type;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="screen_size", type="string", nullable=true)
+     * @ORM\Column(name="hash", type="text", nullable=true)
+     */
+    private $hash;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="screen_size", type="text", nullable=true)
      */
     private $screenSize;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="user_agent", type="string", nullable=true)
+     * @ORM\Column(name="user_agent", type="text", nullable=true)
      */
     private $userAgent;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="device", type="string", nullable=true)
+     * @ORM\Column(name="device", type="text", nullable=true)
      */
     private $device;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="language", type="string", nullable=true)
+     * @ORM\Column(name="language", type="text", nullable=true)
      */
     private $language;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_visible", type="boolean")
+     * @ORM\Column(name="is_visible", type="boolean", options={"default"="true"})
      */
     private $isVisible;
 
@@ -100,6 +107,13 @@ class Visit
      * @ORM\Column(name="occurred_at", type="datetime", nullable=false, options={"default"="now()"})
      */
     private $occurredAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="customs", type="json", nullable=true)
+     */
+    private $customs;
 
     /**
      * @var Visitor

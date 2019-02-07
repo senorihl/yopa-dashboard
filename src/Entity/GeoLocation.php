@@ -17,8 +17,6 @@ class GeoLocation
      *
      * @ORM\Column(name="ip", type="string", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="geo_location_ip_seq", allocationSize=1, initialValue=1)
      */
     private $ip;
 
