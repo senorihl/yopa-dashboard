@@ -15,7 +15,7 @@ class MailingController extends AbstractController
     {
         return $this->render('mailing/index.html.twig', [
             'visits' => $repository->findBy(['type' => 'mailing'], ['occurredAt' => 'DESC'], 20, 0),
-            'pixel' => ['action' => 'Mailings', 'breadcrumb' => ['Home']],
+            'pixel' => ['action' => 'Mailings', 'breadcrumb' => ['Home'], 'silent' => true],
             'controller_name' => 'MailingController',
         ]);
     }

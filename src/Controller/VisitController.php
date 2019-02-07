@@ -20,7 +20,7 @@ class VisitController extends AbstractController
         return $this->render('visit/index.html.twig', [
             'controller_name' => 'VisitController',
             'visits' => $repository->findBy(['type' => 'page'], ['occurredAt' => 'DESC'], 20, 0),
-            'pixel' => ['action' => 'Visits', 'breadcrumb' => ['Home']]
+            'pixel' => ['action' => 'Visits', 'breadcrumb' => ['Home'], 'silent' => true]
         ]);
     }
     /**
@@ -30,7 +30,7 @@ class VisitController extends AbstractController
     {
         return $this->render('visit/one.html.twig', [
             'visit' => $repository->find($id),
-            'pixel' => ['breadcrumb' => ['Home', 'Visits'], 'action' => 'Single']
+            'pixel' => ['breadcrumb' => ['Home', 'Visits'], 'action' => 'Single', 'silent' => true]
         ]);
     }
 }

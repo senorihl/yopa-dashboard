@@ -24,3 +24,7 @@ doctrine:
         dql:
             datetime_functions:
                 date_part: App\DQL\DatePart
+        filters:
+            restrict_filter:
+                class:   'App\Filter\RestrictFilter'
+                enabled: true

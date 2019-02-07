@@ -27,5 +27,15 @@ services:
     App\Subscriber\LocaleSubscriber:
         arguments: ['%locale%']
 
+    App\Filter\RestrictFilter:
+        calls:
+            - method: setReader
+              arguments:
+                  - '@annotation_reader'
+
+    App\Filter\Configurator:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

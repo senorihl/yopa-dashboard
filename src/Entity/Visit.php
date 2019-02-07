@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Annotation\FilterOn;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="visit")
  * @ORM\Entity(repositoryClass="App\Repository\VisitRepository")
+ * @FilterOn(fieldName="is_visible", value="true")
  */
 class Visit
 {
@@ -84,6 +86,13 @@ class Visit
      * @ORM\Column(name="language", type="string", nullable=true)
      */
     private $language;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_visible", type="boolean")
+     */
+    private $isVisible;
 
     /**
      * @var \DateTime
@@ -178,5 +187,10 @@ class Visit
     public function getBreadcrumb(): ?string
     {
         return $this->breadcrumb;
+    }
+
+    public function isVisible(): bool
+    {
+        return $this->isVisible;
     }
 }

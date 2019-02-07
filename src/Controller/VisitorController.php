@@ -19,7 +19,7 @@ class VisitorController extends AbstractController
     {
         return $this->render('visitor/index.html.twig', [
             'controller_name' => 'VisitorController',
-            'pixel' => ['breadcrumb' => ['Home'], 'action' => 'Visitor']
+            'pixel' => ['breadcrumb' => ['Home'], 'action' => 'Visitor', 'silent' => true]
         ]);
     }
     /**
@@ -30,7 +30,7 @@ class VisitorController extends AbstractController
         return $this->render('visitor/one.html.twig', [
             'controller_name' => 'VisitorController',
             'visitor' => $repository->find($id),
-            'pixel' => ['breadcrumb' => ['Home', 'Visitor'], 'action' => 'Single']
+            'pixel' => ['breadcrumb' => ['Home', 'Visitor'], 'action' => 'Single', 'silent' => true]
         ]);
     }
 }

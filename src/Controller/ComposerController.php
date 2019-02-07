@@ -14,7 +14,7 @@ class ComposerController extends AbstractController
     {
         return $this->render('composer/index.html.twig', [
             'controller_name' => 'ComposerController',
-            'pixel' => ['action' => 'Pixel Composer', 'breadcrumb' => ['Home']],
+            'pixel' => ['action' => 'Pixel Composer', 'breadcrumb' => ['Home'], 'silent' => true],
         ]);
     }
 }

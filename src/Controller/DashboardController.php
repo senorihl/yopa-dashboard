@@ -14,7 +14,7 @@ class DashboardController extends AbstractController
     {
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
-            'pixel' => ['action' => 'Home']
+            'pixel' => ['action' => 'Home', 'silent' => true]
         ]);
     }
 }

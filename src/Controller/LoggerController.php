@@ -14,7 +14,7 @@ class LoggerController extends AbstractController
     {
         return $this->render('logger/index.html.twig', [
             'controller_name' => 'LoggerController',
-            'pixel' => ['action' => 'Logger', 'breadcrumb' => ['Home']],
+            'pixel' => ['action' => 'Logger', 'breadcrumb' => ['Home'], 'silent' => true],
         ]);
     }
 }
