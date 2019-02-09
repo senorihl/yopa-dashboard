@@ -37,13 +37,22 @@ class VisitRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('visit');
 
-        return $qb
+        $results = $qb
             ->select('visit.language', $qb->expr()->count('visit') . 'as count')
             ->groupBy('visit.language')
             ->where($qb->expr()->gte('visit.occurredAt', '?0'))
             ->setParameter(0, date_create('yesterday'))
             ->getQuery()
             ->getResult();
+
+        return array_map(function ($result) {
+            if ($result['language'] !== null) {
+                $result['language'] = locale_get_display_language($result['language']);
+            } else {
+                $result['language'] = 'Unknown';
+            }
+            return $result;
+        }, $results);
     }
 
     public function findTopUrl()

@@ -58,14 +58,14 @@ class ChartController extends AbstractController
         $repartition = $repository->findTopUrl();
 
         foreach ($repartition as $visitsCount) {
-            if (!isset($simple[$visitsCount['hour']])) {
-                $simple[$visitsCount['hour']] = [];
+            if (!isset($simple[$visitsCount['action']])) {
+                $simple[$visitsCount['action']] = [];
             }
-            if (!isset($simple[$visitsCount['hour']][$visitsCount['action']])) {
-                $simple[$visitsCount['hour']][$visitsCount['action']] = [];
+            if (!isset($simple[$visitsCount['action']][$visitsCount['hour']])) {
+                $simple[$visitsCount['action']][$visitsCount['hour']] = [];
             }
 
-            $simple[$visitsCount['hour']][$visitsCount['action']] = $visitsCount['count'];
+            $simple[$visitsCount['action']][$visitsCount['hour']] = $visitsCount['count'];
         }
 
         return new JsonResponse($simple);
