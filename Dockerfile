@@ -12,7 +12,7 @@ RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
 
 RUN set -eux \
     && apt-get update \
-    && apt-get install -y curl git apt-transport-https apt-utils \
+    && apt-get install -y curl git apt-transport-https apt-utils supervisor \
     build-essential locales acl mailutils wget zip unzip zlib1g-dev libicu-dev g++ gnupg gnupg1 gnupg2 libpq-dev
 
 RUN docker-php-ext-configure intl \
@@ -33,6 +33,11 @@ RUN curl -s -o "/usr/local/src/node-v${NODE_VERSION}-linux-x64.tar.xz" "https://
     && ln -sf "/usr/local/src/node-v${NODE_VERSION}-linux-x64/bin/npm" /usr/local/bin/npm \
     && /usr/local/bin/npm install --global yarn \
     && ln -sf "/usr/local/src/node-v${NODE_VERSION}-linux-x64/bin/yarn" /usr/local/bin/yarn
+
+RUN mkdir -p /var/log/supervisor
+COPY config/docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 RUN groupadd dev -g 999
 RUN useradd dev -g dev -d /home/dev -m
