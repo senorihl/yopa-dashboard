@@ -1,9 +1,13 @@
 import JSONEditor from 'jsoneditor';
+import {EventEmitter} from "events";
+import LocaleCode from 'locale-code';
 import 'jsoneditor/dist/jsoneditor.min.css';
 
 declare global {
     interface Window {
         breadcrumbRemove: (removableId) => void;
+        yopa?: any | EventEmitter;
+        onYopaLoaded: (any) => void;
     }
 }
 
@@ -13,6 +17,8 @@ const fields = {
     result: document.getElementById('result') as HTMLInputElement,
     type: document.getElementById('pixel_type') as HTMLSelectElement,
     action: document.getElementById('pixel_action') as HTMLInputElement,
+    origin: document.getElementById('pixel_origin') as HTMLInputElement,
+    locale: document.getElementById('pixel_locale') as HTMLInputElement,
     custom: document.getElementById('pixel_custom') as HTMLInputElement,
     custom_editor: document.getElementById('pixel_custom_editor') as HTMLDivElement,
 };
@@ -39,6 +45,7 @@ window.breadcrumbRemove = function (removableId) {
 const updatePixel = () => {
     const breadcrumbElements = document.querySelectorAll('[id^="pixel_breadcrumb_"]') as NodeListOf<HTMLInputElement>;
     const breadcrumb = [];
+    const wrapper: any = {};
     const opts: any = {
         ...JSON.parse(fields.custom.value || '{}'),
         action: fields.action.value,
@@ -55,10 +62,35 @@ const updatePixel = () => {
         opts.breadcrumb = breadcrumb;
     }
 
-    fields.result.value = `${window.location.protocol}//${SERVICE_URL || window.location.host}/pixel.png?yt=${fields.type.value}&yc=${encodeURIComponent(JSON.stringify(opts))}`;
+    if (fields.origin.value.trim() !== '') {
+        wrapper.or = fields.origin.value.trim();
+    }
+
+    if (fields.locale.value.trim() !== '' && LocaleCode.validate(fields.locale.value.trim())) {
+        wrapper.l = fields.locale.value.trim();
+    }
+
+    let method;
+    const args = [];
+
+    switch (fields.type.value) {
+        case 'page': method = window.yopa.page; break;
+        case 'click': method = window.yopa.click; break;
+        case 'mailing': method = window.yopa.mailing; break;
+    }
+
+    args.push(fields.action.value);
+    args.push({...opts, ...customEditor.get()});
+    args.push(wrapper);
+    window.yopa.disable = true;
+    window.yopa.once('pixel', (pixelUrl, ...args) => {
+        console.log(args);
+        fields.result.value = `${window.location.protocol}${pixelUrl}`;
+    });
+    method.apply(window.yopa, args);
 };
 
-new JSONEditor(fields.custom_editor, {
+const customEditor = new JSONEditor(fields.custom_editor, {
     onChangeJSON: (data) => {
         fields.custom.value = JSON.stringify(data);
         updatePixel();
@@ -77,6 +109,8 @@ new JSONEditor(fields.custom_editor, {
     }
 }, JSON.parse(fields.custom.value));
 
-form.addEventListener('change',updatePixel);
-form.addEventListener('keyup',updatePixel);
-document.addEventListener('DOMContentLoaded', updatePixel);
+window.yopa.onLoaded(() => {
+    form.addEventListener('change',updatePixel);
+    form.addEventListener('keyup',updatePixel);
+});
+

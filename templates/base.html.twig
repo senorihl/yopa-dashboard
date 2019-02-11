@@ -26,14 +26,14 @@
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
     <script>
-        window["onYopaLoaded"] = function (yopa) {
+        window.yopa.onLoaded(function (yopa) {
             {% if app.user %}
-                yopa.identity({{ app.user|json_encode }});
+            yopa.identity({{ app.user|json_encode }});
             {% endif %}
             {% if pixel is defined and pixel.action is defined %}
-                yopa.page({{ pixel.action|json_encode|raw }}, {{ pixel|default({})|json_encode|raw }});
+            yopa.page({{ pixel.action|json_encode|raw }}, {{ pixel|default({})|json_encode|raw }});
             {% endif %}
-        };
+        });
     </script>
 {% endblock %}
 </body>

@@ -29,6 +29,20 @@
             </div>
             <br />
             <div>
+                <label class="uk-form-label">Origin</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" type="text" name="pixel_origin" id="pixel_origin" value="sample origin">
+                </div>
+            </div>
+            <br />
+            <div>
+                <label class="uk-form-label">Locale</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" type="text" name="pixel_locale" id="pixel_locale" value="{{ app.request.locale }}">
+                </div>
+            </div>
+            <br />
+            <div>
                 <label class="uk-form-label">
                     Breadcrumb
                     {% set prototype -%}
@@ -67,7 +81,7 @@
             <div>
                 <label class="uk-form-label">Pixel URL</label>
                 <div class="uk-form-controls">
-                    <textarea id="result" class="uk-textarea" type="text" placeholder="/pixel.png" disabled style="resize:vertical; font-family: monospace"></textarea>
+                    <textarea id="result" class="uk-textarea" type="text" placeholder="/pixel.png" disabled style="resize:vertical; font-family: monospace" rows="5"></textarea>
                 </div>
             </div>
         </form>
